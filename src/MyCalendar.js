@@ -9,18 +9,7 @@ import React from 'react'
 const MyCalendar=() => {
   return (
     <div className='calendar'>
-      <h1>Pick up the starting date</h1>
-      <form>
-        <label>
-          Starting Date:
-        </label>
-        <input type="date" id="start-date"/>
-        <label>
-          Ending Date
-        </label>
-        <input type="date" id="end-date"/>
-        <input type="submit" value="submit"/>
-      </form>
+      
     </div>
   );
 }
