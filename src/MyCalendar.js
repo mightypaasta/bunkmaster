@@ -24,7 +24,7 @@ const MyCalendar=() => {
 
   useEffect(()=>{
     const dt=new Date();
-    const weekdays=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const weekdays=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
     // Changing the value of the month depending upon the value of the nav
     if(nav!==0){
@@ -58,7 +58,10 @@ const MyCalendar=() => {
 
     setDateDisplay(dt.toLocaleDateString('en-us',{month:'long'}));
 
-    // padding days are used to 
+    // padding days are used to indicate the days before the 1st day of the month
+    // E.g Friday is the 1st day of Jan 2022 
+    // Therefore, Monday,Tuesday,Wednesday,Thursday are called the padding days
+    // No of paddingDays can be calculated by finding the index of the first day of the month in the weekdays array
     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
   },[nav,events])
   
