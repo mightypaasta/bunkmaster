@@ -46,7 +46,7 @@ const MyCalendar=() => {
     // month. So passing in 1 as the month number will return the last day
     // of January, not February
     
-    const dayInMonth=new Date(year,month+1,0).getDate();
+    const daysInMonth=new Date(year,month+1,0).getDate();
 
     // storing date in the format of "Thursday, 20 December 2012"
     const dateString=firstDayOfMonth.toLocaleDateString('en-us',{
@@ -63,6 +63,33 @@ const MyCalendar=() => {
     // Therefore, Monday,Tuesday,Wednesday,Thursday are called the padding days
     // No of paddingDays can be calculated by finding the index of the first day of the month in the weekdays array
     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
+
+    // dayArr stores the day object in the array 
+    const dayArr=[];
+
+    for(let i=1;i<=paddingDays+daysInMonth;i++){
+      const dayString = `${month+1}/${i-paddingDays}/${year}`;
+
+      if(i>paddingDays){
+        dayArr.push({
+          value:i-paddingDays,
+          event: eventForDate(dayString),
+          isCurrentDay: i-paddingDays === day && nav === 0,
+          date: dayString
+        })
+      }
+      else{
+        dayArr.push({
+          value: 'padding',
+          event:  null,
+          isCurrentDay: false,
+          date: ''
+        })
+      }
+    }
+
+    // Updating the days everytime a new event is added or user navigates to some other month/year
+    setDays(dayArr);
   },[nav,events])
   
   return (
@@ -78,7 +105,7 @@ const MyCalendar=() => {
           <div>Saturday</div>
           <div>Sunday</div>
         </div>
-        {/* <div id='calendar'>
+        <div id='calendar'>
            {events.map((d,index)=>{
              <Day 
               day={d}
@@ -90,7 +117,7 @@ const MyCalendar=() => {
               }}  
             />
            })}
-        </div> */}
+        </div>
         <div id='mark-date'></div>
         <div id='unmark-date'></div>      
       </div>
