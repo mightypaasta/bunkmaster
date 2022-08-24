@@ -1,6 +1,6 @@
-import VanillaCalendar from '@uvarov.frontend/vanilla-calendar';
 import React , { useEffect, useState } from 'react'
 import CalendarHeader from './CalendarHeader/CalendarHeader';
+import Day from './Day/Day'
 import './calendar.css'
 
 // const calEl = document.querySelector('#calendar');
@@ -90,6 +90,7 @@ const MyCalendar=() => {
 
     // Updating the days everytime a new event is added or user navigates to some other month/year
     setDays(dayArr);
+
   },[nav,events])
   
   return (
@@ -106,13 +107,14 @@ const MyCalendar=() => {
           <div>Sunday</div>
         </div>
         <div id='calendar'>
+           {/* importing the Day component  */}
            {events.map((d,index)=>{
              <Day 
               day={d}
               key={index}
               onClick={()=>{
-                if(day.value!=='padding'){
-                  setClicked(day.date);
+                if(days.value!=='padding'){
+                  setClicked(days.date);
                 }
               }}  
             />
